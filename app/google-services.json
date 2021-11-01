@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "189011089816",
+    "project_id": "androidapp-3a6e3",
+    "storage_bucket": "androidapp-3a6e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189011089816:android:ad4d980037fd84c68ef3ed",
+        "android_client_info": {
+          "package_name": "com.example.instantfuel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189011089816-ck1vrqr50cnrufharr7vn7l0peajtj63.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPFHbtNX3N41ae1QhqnDouf1jhQ2gnx2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189011089816-ck1vrqr50cnrufharr7vn7l0peajtj63.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189011089816:android:8ca8e9d4719c01ae8ef3ed",
+        "android_client_info": {
+          "package_name": "com.example.loginapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189011089816-ck1vrqr50cnrufharr7vn7l0peajtj63.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPFHbtNX3N41ae1QhqnDouf1jhQ2gnx2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189011089816-ck1vrqr50cnrufharr7vn7l0peajtj63.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
