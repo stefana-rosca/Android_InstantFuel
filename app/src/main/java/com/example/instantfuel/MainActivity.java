@@ -1,6 +1,7 @@
 package com.example.instantfuel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity {
 
     Button btnLogOut;
     Button btnMap;
@@ -31,6 +32,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
 
+        btnMap.setOnClickListener(view ->{
+
+            startActivity(new Intent(MainActivity.this, MapActivity.class));
+        });
+
+
         System.out.println(mAuth.getUid());
     }
 
@@ -41,12 +48,5 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (user == null){
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        btnMap.setOnClickListener(view ->{
-            startActivity(new Intent(MainActivity.this, MapsFragment.class));
-        });
     }
 }
