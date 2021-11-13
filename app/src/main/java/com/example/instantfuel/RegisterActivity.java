@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    TextInputEditText etRegName;
     TextInputEditText etRegEmail;
     TextInputEditText etRegPassword;
     TextView tvLoginHere;
@@ -28,8 +29,9 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
+        etRegName = findViewById(R.id.etRegName);
         etRegEmail = findViewById(R.id.etRegEmail);
         etRegPassword = findViewById(R.id.etRegPass);
         tvLoginHere = findViewById(R.id.tvLoginHere);
@@ -47,10 +49,15 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createUser(){
+        String name = etRegName.getText().toString();
         String email = etRegEmail.getText().toString();
         String password = etRegPassword.getText().toString();
 
-        if (TextUtils.isEmpty(email)){
+        if(TextUtils.isEmpty(name)){
+            etRegName.setError("Name cannot be empty");
+            etRegName.requestFocus();
+        }
+        else if (TextUtils.isEmpty(email)){
             etRegEmail.setError("Email cannot be empty");
             etRegEmail.requestFocus();
         }else if (TextUtils.isEmpty(password)){
