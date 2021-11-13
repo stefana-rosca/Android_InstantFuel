@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     Button btnLogOut;
+    Button btnMap;
     FirebaseAuth mAuth;
 
     @Override
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnLogOut = findViewById(R.id.btnLogout);
+        btnMap = findViewById(R.id.btnMap);
         mAuth = FirebaseAuth.getInstance();
 
         btnLogOut.setOnClickListener(view ->{
@@ -37,5 +41,12 @@ public class MainActivity extends AppCompatActivity {
         if (user == null){
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        btnMap.setOnClickListener(view ->{
+            startActivity(new Intent(MainActivity.this, MapsFragment.class));
+        });
     }
 }
