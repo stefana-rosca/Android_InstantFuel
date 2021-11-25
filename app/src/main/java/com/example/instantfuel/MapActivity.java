@@ -30,6 +30,8 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        /*Fragment fragment = new MapsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();*/
 
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         client = LocationServices.getFusedLocationProviderClient(this);
@@ -39,9 +41,7 @@ public class MapActivity extends AppCompatActivity {
         } else {
             ActivityCompat.requestPermissions(MapActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
-/*
-        Fragment fragment = new MapsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();*/
+
     }
 
     private void getCurrentLocation() {
