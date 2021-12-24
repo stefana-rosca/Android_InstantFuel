@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnLogOut;
     Button btnMap;
+    Button btnNewOrder;
     FirebaseAuth mAuth;
 
     @Override
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnLogOut = findViewById(R.id.btnLogout);
         btnMap = findViewById(R.id.btnMap);
+        btnNewOrder = findViewById(R.id.btnNewOrder);
         mAuth = FirebaseAuth.getInstance();
 
         btnLogOut.setOnClickListener(view ->{
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, MapActivity.class));
         });
 
+        btnNewOrder.setOnClickListener(view ->{
+
+            startActivity(new Intent(MainActivity.this, NewOrderActivity.class));
+        });
 
         System.out.println(mAuth.getUid());
     }
