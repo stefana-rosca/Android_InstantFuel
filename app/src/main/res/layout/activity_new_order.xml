@@ -10,7 +10,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="Choose the fuel type:"
         android:textSize="20sp"
@@ -50,7 +50,7 @@
         android:id="@+id/textViewQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_below="@id/spinnerType"
         android:layout_marginTop="90dp"
         android:text="Quantity:"
@@ -83,12 +83,30 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/textViewLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="20dp"
+        android:text="Your location: "
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnMap"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginLeft="90dp"
+        android:text="View your location: "
+        />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:text="Order now!"/>
+        android:layout_marginTop="600dp"
+        android:text="Order now!" />
 
 
 </RelativeLayout>
