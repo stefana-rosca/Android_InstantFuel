@@ -3,16 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_login.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_map.xml" value="0.1" />
-        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_new_order.xml" value="0.264" />
-        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.14387031408308004" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1394422310756972" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.24592391304347827" />
+        <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.3098958333333333" />
       </map>
     </option>
   </component>
