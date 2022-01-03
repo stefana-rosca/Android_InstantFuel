@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         // to make the Navigation drawer icon always appear on the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnLogOut = findViewById(R.id.btnLogout);
-        btnMap = findViewById(R.id.btnMap);
+//        btnLogOut = findViewById(R.id.btnLogout);
+//        btnMap = findViewById(R.id.btnMap);
         btnNewOrder = findViewById(R.id.btnNewOrder);
         loggedInUserMsg = findViewById(R.id.textView);
         mAuth = FirebaseAuth.getInstance();
@@ -88,15 +88,15 @@ public class MainActivity extends AppCompatActivity {
         if (LoginActivity.loggedIn)
             getUsersFromDbAndUpdateMainMsg();
 
-        btnLogOut.setOnClickListener(view ->{
-            mAuth.signOut();
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        });
+//        btnLogOut.setOnClickListener(view ->{
+//            mAuth.signOut();
+//            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//        });
 
-        btnMap.setOnClickListener(view ->{
-
-            startActivity(new Intent(MainActivity.this, MapActivity.class));
-        });
+//        btnMap.setOnClickListener(view ->{
+//
+//            startActivity(new Intent(MainActivity.this, MapActivity.class));
+//        });
 
         btnNewOrder.setOnClickListener(view ->{
 
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(user.getUserUID().equals(mAuth.getCurrentUser().getUid()))
                                     loggedUserName = user.getName();
                             }
-                            loggedInUserMsg.setText("You are logged in as " + loggedUserName.toUpperCase());
+                            loggedInUserMsg.setText("Welcome, " + loggedUserName.toUpperCase() + "!");
                         }
                     }
                 })
