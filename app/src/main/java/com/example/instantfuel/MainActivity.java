@@ -85,29 +85,24 @@ public class MainActivity extends AppCompatActivity {
     // the item click listener callback
     // to open and close the navigation
     // drawer when the icon is clicked
-    public boolean activate(@NonNull MenuItem item){
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (activate(item)) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             int id = item.getItemId();
-            System.out.println(id + " AICIIIII " + R.id.map);
+            System.out.println(id + " AICIIIII " + R.id.nav_map);
 
-
-            if (id == R.id.map) {
-                System.out.println(id + " ACOLO " + R.id.map);
+            if (id == R.id.nav_map) {
+                System.out.println(id + " ACOLO " + R.id.nav_map);
                 startActivity(new Intent(MainActivity.this, MapActivity.class));
-                return true;
+                return false;
             }
-            if (id == R.id.btnLogout) {
+            if (id == R.id.nav_logout) {
                 mAuth.signOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                return true;
+                return false;
             }
+            return true;
         }
         return super.onOptionsItemSelected(item);
 
