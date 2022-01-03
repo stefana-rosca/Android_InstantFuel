@@ -3,6 +3,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -34,49 +37,52 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if (SaveLoggedUser.getUserName(MainActivity.this).length() == 0)
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        else {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
 
-        drawerLayout = findViewById(R.id.my_drawer_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+            drawerLayout = findViewById(R.id.my_drawer_layout);
+            actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
-        NavigationView navigationView = findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id=menuItem.getItemId();
-                if (id == R.id.nav_map) {
-                    System.out.println(id + " ACOLO " + R.id.nav_map);
-                    startActivity(new Intent(MainActivity.this, MapActivity.class));
+            NavigationView navigationView = findViewById(R.id.navigationView);
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    int id = menuItem.getItemId();
+                    if (id == R.id.nav_map) {
+                        System.out.println(id + " ACOLO " + R.id.nav_map);
+                        startActivity(new Intent(MainActivity.this, MapActivity.class));
+                    }
+                    if (id == R.id.nav_logout) {
+                        mAuth.signOut();
+                        clearUserName(getApplicationContext());
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
+                    return true;
                 }
-                if (id == R.id.nav_logout) {
-                    mAuth.signOut();
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                }
-                return true;
-            }
-        });
+            });
 
-        // pass the Open and Close toggle for the drawer layout listener
-        // to toggle the button
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+            // pass the Open and Close toggle for the drawer layout listener
+            // to toggle the button
+            drawerLayout.addDrawerListener(actionBarDrawerToggle);
+            actionBarDrawerToggle.syncState();
 
-        // to make the Navigation drawer icon always appear on the action bar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            // to make the Navigation drawer icon always appear on the action bar
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnNewOrder = findViewById(R.id.btnNewOrder);
-        loggedInUserMsg = findViewById(R.id.textView);
-        mAuth = FirebaseAuth.getInstance();
+            btnNewOrder = findViewById(R.id.btnNewOrder);
+            loggedInUserMsg = findViewById(R.id.textView);
+            mAuth = FirebaseAuth.getInstance();
 
-        if (LoginActivity.loggedIn)
-            getUsersFromDbAndUpdateMainMsg();
+//            if (LoginActivity.loggedIn)
+                getUsersFromDbAndUpdateMainMsg();
 
-        btnNewOrder.setOnClickListener(view ->{
-
-            startActivity(new Intent(MainActivity.this, NewOrderActivity.class));
-        });
-
+            btnNewOrder.setOnClickListener(view -> {
+                startActivity(new Intent(MainActivity.this, NewOrderActivity.class));
+            });
+        }
     }
 
     public void getUsersFromDbAndUpdateMainMsg() {
@@ -137,5 +143,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void clearUserName(Context ctx)
+    {
+        SharedPreferences.Editor editor = SaveLoggedUser.getSharedPreferences(ctx).edit();
+        editor.clear(); //clear all stored data
+        editor.commit();
     }
 }
