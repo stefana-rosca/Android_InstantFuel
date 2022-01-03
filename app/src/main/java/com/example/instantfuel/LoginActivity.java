@@ -3,6 +3,7 @@ package com.example.instantfuel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -63,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         Toast.makeText(LoginActivity.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
                         loggedIn = true;
+                        SaveLoggedUser.setUserName(getApplicationContext(), etLoginEmail.getText().toString());
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }else{
                         Toast.makeText(LoginActivity.this, "Log in Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
