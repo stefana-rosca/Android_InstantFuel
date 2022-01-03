@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.content.ClipData;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import android.content.Intent;
@@ -22,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,17 +74,78 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.navigation_menu, menu);
+        return true;
+    }
+
     // override the onOptionsItemSelected()
     // function to implement
     // the item click listener callback
     // to open and close the navigation
     // drawer when the icon is clicked
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
+    public boolean activate(@NonNull MenuItem item){
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (activate(item)) {
+            int id = item.getItemId();
+            System.out.println(id + " AICIIIII " + R.id.map);
+
+
+            if (id == R.id.map) {
+                System.out.println(id + " ACOLO " + R.id.map);
+                startActivity(new Intent(MainActivity.this, MapActivity.class));
+                return true;
+            }
+            if (id == R.id.btnLogout) {
+                mAuth.signOut();
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+
+        /*boolean check = false;
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            check = true;
+
+            int id = item.getItemId();
+            if (id == R.id.nav_map) {
+                System.out.println("AM INTRATTTTT" + id);
+                Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(myIntent);
+                return false;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+        return check;*/
+        /*if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        //return super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+            case R.id.nav_logout:
+                // User chose the "Settings" item, show the app settings UI...
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                return false;
+
+            case R.id.nav_settings:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }*/
     }
 }
