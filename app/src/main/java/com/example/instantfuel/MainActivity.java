@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.Button;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -33,6 +34,25 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id=menuItem.getItemId();
+                if (id == R.id.nav_map) {
+                    System.out.println(id + " ACOLO " + R.id.nav_map);
+                    startActivity(new Intent(MainActivity.this, MapActivity.class));
+//                    return false;
+                }
+                if (id == R.id.nav_logout) {
+                    mAuth.signOut();
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//                    return false;
+                }
+                return true;
+            }
+        });
 
         // pass the Open and Close toggle for the drawer layout listener
         // to toggle the button
@@ -74,11 +94,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.navigation_menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu){
+//        getMenuInflater().inflate(R.menu.navigation_menu, menu);
+//        return true;
+//    }
 
     // override the onOptionsItemSelected()
     // function to implement
@@ -89,19 +109,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            int id = item.getItemId();
-            System.out.println(id + " AICIIIII " + R.id.nav_map);
-
-            if (id == R.id.nav_map) {
-                System.out.println(id + " ACOLO " + R.id.nav_map);
-                startActivity(new Intent(MainActivity.this, MapActivity.class));
-                return false;
-            }
-            if (id == R.id.nav_logout) {
-                mAuth.signOut();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                return false;
-            }
             return true;
         }
         return super.onOptionsItemSelected(item);
