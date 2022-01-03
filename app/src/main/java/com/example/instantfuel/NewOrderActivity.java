@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -108,8 +110,10 @@ public class NewOrderActivity extends AppCompatActivity {
                 checkSelectedSpinner2 = true;
                 totalPrice = selectedFuelPrice * quantities.get(position);
                 selectedQuantity = quantities.get(position);
-                if (position!=0)
-                    textViewTotalPrice.setText("Total price: " + totalPrice);
+                if (position!=0) {
+                    String totalPriceRounded = String.format("%.2f", totalPrice);
+                    textViewTotalPrice.setText("Total price: " + totalPriceRounded);
+                }
                 else {
                     textViewTotalPrice.setText("Total price: 0");
                     checkSelectedSpinner2 = false;
@@ -124,13 +128,17 @@ public class NewOrderActivity extends AppCompatActivity {
 
         loadDataInSpinnerQuantity();
 
+        Intent intent = getIntent();
+        String locationString = "";
+        locationString = intent.getStringExtra("locationString");
+        textViewLocation = findViewById(R.id.textViewLocation);
+        textViewLocation.setText("");
         btnMap.setOnClickListener(view ->{
             startActivity(new Intent(NewOrderActivity.this, MapActivity.class));
         });
 
-        textViewLocation = findViewById(R.id.textViewLocation);
-        textViewLocation.setText(MapActivity.locationString.toString());
-        Log.d("loc", MapActivity.locationString.toString());
+        textViewLocation.setText(locationString);
+        Log.d("loccc","NewOrder" + String.valueOf(locationString));
 
         btnOrder = findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(view -> {
@@ -140,7 +148,7 @@ public class NewOrderActivity extends AppCompatActivity {
 
     private void loadDataInSpinnerType(){
         ArrayAdapter fuelArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, fuelList);
-        fuelArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fuelArrayAdapter.setDropDownViewResource(android .R.layout.simple_spinner_dropdown_item);
         spinnerType.setAdapter(fuelArrayAdapter);
     }
 
@@ -156,7 +164,8 @@ public class NewOrderActivity extends AppCompatActivity {
     FirebaseFirestore database;
     public void saveOrder() {
         if (checkSelectedSpinner1 && checkSelectedSpinner2) {
-            Order order = new Order(selectedFuelType, selectedQuantity, totalPrice, new Timestamp(System.currentTimeMillis()));
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            Order order = new Order(selectedFuelType, selectedQuantity, totalPrice, new Timestamp(System.currentTimeMillis()), user.getUid());
             CollectionReference dbOrder = database.collection("Order");
 
             dbOrder.add(order).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

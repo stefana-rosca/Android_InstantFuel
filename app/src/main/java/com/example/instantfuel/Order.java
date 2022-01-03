@@ -1,12 +1,23 @@
 package com.example.instantfuel;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Date;
 
 public class Order {
+    private String userUID;
     private String FuelType;
     private int Quantity;
     private double TotalPrice;
     private Date date;
+
+    public String getUser() {
+        return userUID;
+    }
+
+    public void setUser(String userUID) {
+        this.userUID = userUID;
+    }
 
     public String getFuelType() {
         return FuelType;
@@ -40,10 +51,11 @@ public class Order {
         this.date = date;
     }
 
-    public Order(String fuelType, int quantity, double totalPrice, Date date) {
+    public Order(String fuelType, int quantity, double totalPrice, Date date, String userUID) {
         FuelType = fuelType;
         Quantity = quantity;
         TotalPrice = totalPrice;
         this.date = date;
+        this.userUID = userUID;
     }
 }

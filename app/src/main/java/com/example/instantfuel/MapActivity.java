@@ -6,11 +6,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -34,7 +38,8 @@ public class MapActivity extends AppCompatActivity {
 
     Geocoder geocoder;
     List<Address> addresses;
-    static StringBuilder locationString = new StringBuilder();
+    public static StringBuilder locationString = new StringBuilder();
+    Button btnConfirmLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +51,24 @@ public class MapActivity extends AppCompatActivity {
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         client = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
             getCurrentLocation();
         } else {
             ActivityCompat.requestPermissions(MapActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
 
         geocoder = new Geocoder(this, Locale.getDefault());
+
+        btnConfirmLocation = findViewById(R.id.btnConfirm);
+        btnConfirmLocation.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), NewOrderActivity.class);
+                Log.d("loccc","Map  " +  String.valueOf(locationString));
+                i.putExtra("locationString", locationString.toString());
+                v.getContext().startActivity(i);
+            }
+        });
 
     }
 
@@ -88,12 +104,13 @@ public class MapActivity extends AppCompatActivity {
                             }
 
                             String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                            String city = addresses.get(0).getLocality();
-                            String state = addresses.get(0).getAdminArea();
-                            String country = addresses.get(0).getCountryName();
-                            String postalCode = addresses.get(0).getPostalCode();
-                            String knownName = addresses.get(0).getFeatureName();
-                            locationString.append(address).append(", ").append(city).append(", ").append(state).append(", ").append(country).append(", ").append(postalCode);
+//                            String city = addresses.get(0).getLocality();
+//                            String state = addresses.get(0).getAdminArea();
+//                            String country = addresses.get(0).getCountryName();
+//                            String postalCode = addresses.get(0).getPostalCode();
+//                            String knownName = addresses.get(0).getFeatureName();
+                            if (locationString.length()==0)
+                                locationString.append(address);
                         }
                     });
                 }

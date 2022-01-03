@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseFirestore db;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,29 +75,12 @@ public class RegisterActivity extends AppCompatActivity {
             etRegPassword.setError("Password cannot be empty");
             etRegPassword.requestFocus();
         }else {
-            User user = new User(etRegName.getText().toString(), etRegEmail.getText().toString(), etRegPassword.getText().toString());
-            CollectionReference dbUser = db.collection("User");
-
-            dbUser.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                @Override
-                public void onSuccess(DocumentReference documentReference) {
-                    // after the data addition is successful
-                    // we are displaying a success toast message.
-                    Toast.makeText(RegisterActivity.this, "Your Course has been added to Firebase Firestore", Toast.LENGTH_SHORT).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    // this method is called when the data addition process is failed.
-                    // displaying a toast message when data addition is failed.
-                    Toast.makeText(RegisterActivity.this, "Fail to add course \n" + e, Toast.LENGTH_SHORT).show();
-                }
-            });
-
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        String currentUserID=task.getResult().getUser().getUid();
+                        saveToDatabase(currentUserID);
                         Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     } else {
@@ -102,7 +88,28 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 }
             });
+
         }
+        }
+
+        public void saveToDatabase(String currentUserID) {
+            CollectionReference dbUser = db.collection("User");
+            User user = new User(currentUserID,etRegName.getText().toString(), etRegEmail.getText().toString(), etRegPassword.getText().toString());
+            dbUser.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    // after the data addition is successful
+                    // we are displaying a success toast message.
+                    Toast.makeText(RegisterActivity.this, "User has been added to Firebase Firestore", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // this method is called when the data addition process is failed.
+                    // displaying a toast message when data addition is failed.
+                    Toast.makeText(RegisterActivity.this, "Fail to add user \n" + e, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
 

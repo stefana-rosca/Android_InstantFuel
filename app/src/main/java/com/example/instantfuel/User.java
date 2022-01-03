@@ -1,14 +1,27 @@
 package com.example.instantfuel;
 
 public class User {
-    public String name;
-    public String email;
-    public String password;
+    private String userUID;
+    private String name;
+    private String email;
+    private String password;
 
-    public User(String name, String email, String password) {
+    public User() {
+    }
+
+    public User(String userUID, String name, String email, String password) {
+        this.userUID = userUID;
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public String getUserUID() {
+        return userUID;
+    }
+
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
     }
 
     public String getName() {
