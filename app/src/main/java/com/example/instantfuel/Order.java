@@ -11,11 +11,11 @@ public class Order {
     private double TotalPrice;
     private Date date;
 
-    public String getUser() {
+    public String getUserUID() {
         return userUID;
     }
 
-    public void setUser(String userUID) {
+    public void setUserUID(String userUID) {
         this.userUID = userUID;
     }
 
@@ -57,5 +57,19 @@ public class Order {
         TotalPrice = totalPrice;
         this.date = date;
         this.userUID = userUID;
+    }
+
+    public Order() {
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "userUID='" + userUID + '\'' +
+                ", FuelType='" + FuelType + '\'' +
+                ", Quantity=" + Quantity +
+                ", TotalPrice=" + TotalPrice +
+                ", date=" + date +
+                '}';
     }
 }

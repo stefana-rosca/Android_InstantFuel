@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (SaveLoggedUser.getUserName(MainActivity.this).length() == 0)
+        if (SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         else {
             super.onCreate(savedInstanceState);
@@ -59,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
                         mAuth.signOut();
                         clearUserName(getApplicationContext());
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
+                    if (id == R.id.nav_history) {
+                        startActivity(new Intent(MainActivity.this, HistoryActivity.class));
                     }
                     return true;
                 }
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void clearUserName(Context ctx)
     {
-        SharedPreferences.Editor editor = SaveLoggedUser.getSharedPreferences(ctx).edit();
+        android.content.SharedPreferences.Editor editor = SaveSharedPreference.getSharedPreferences(ctx).edit();
         editor.clear(); //clear all stored data
         editor.commit();
     }

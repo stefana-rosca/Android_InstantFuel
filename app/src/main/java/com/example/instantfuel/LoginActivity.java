@@ -3,10 +3,10 @@ package com.example.instantfuel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         Toast.makeText(LoginActivity.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
                         loggedIn = true;
-                        SaveLoggedUser.setUserName(getApplicationContext(), etLoginEmail.getText().toString());
+                        SaveSharedPreference.setUserName(getApplicationContext(), etLoginEmail.getText().toString());
+                        Log.d("heeei", "onComplete: "+mAuth.getUid());
+                        SaveSharedPreference.setUserUid(getApplicationContext(), mAuth.getUid());
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }else{
                         Toast.makeText(LoginActivity.this, "Log in Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

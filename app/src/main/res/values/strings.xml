@@ -2,7 +2,7 @@
     <string name="app_name">InstantFuel</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
-    <string name="nav_settings">Settings</string>
+    <string name="nav_history">History</string>
     <string name="nav_account">Account</string>
     <string name="nav_logout">Logout</string>
     <string name="nav_map">Map</string>
