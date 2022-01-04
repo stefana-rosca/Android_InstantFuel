@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         if (SaveLoggedUser.getUserName(MainActivity.this).length() == 0)
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         else {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
 
             drawerLayout = findViewById(R.id.my_drawer_layout);
             actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             mAuth = FirebaseAuth.getInstance();
 
 //            if (LoginActivity.loggedIn)
-                getUsersFromDbAndUpdateMainMsg();
+            getUsersFromDbAndUpdateMainMsg();
 
             btnNewOrder.setOnClickListener(view -> {
                 startActivity(new Intent(MainActivity.this, NewOrderActivity.class));
@@ -118,21 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user == null){
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        }
-    }
-
-    // override the onOptionsItemSelected()
-    // function to implement
-    // the item click listener callback
-    // to open and close the navigation
-    // drawer when the icon is clicked
+    
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
