@@ -52,13 +52,16 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     int id = menuItem.getItemId();
                     if (id == R.id.nav_map) {
-                        System.out.println(id + " ACOLO " + R.id.nav_map);
                         startActivity(new Intent(MainActivity.this, MapActivity.class));
                     }
                     if (id == R.id.nav_logout) {
                         mAuth.signOut();
                         clearUserName(getApplicationContext());
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
+                    if (id == R.id.nav_account) {
+                        clearUserName(getApplicationContext());
+                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                     }
                     return true;
                 }
@@ -125,18 +128,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu){
-//        getMenuInflater().inflate(R.menu.navigation_menu, menu);
-//        return true;
-//    }
-
     // override the onOptionsItemSelected()
     // function to implement
     // the item click listener callback
     // to open and close the navigation
     // drawer when the icon is clicked
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {

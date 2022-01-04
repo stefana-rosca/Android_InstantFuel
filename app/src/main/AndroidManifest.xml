@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstantFuel">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewOrderActivity"
             android:exported="true" />
         <activity
