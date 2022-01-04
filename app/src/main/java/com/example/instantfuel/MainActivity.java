@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_main);
-        super.onCreate(savedInstanceState);
 
         if (SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         else {
+            setContentView(R.layout.activity_main);
+            super.onCreate(savedInstanceState);
             drawerLayout = findViewById(R.id.my_drawer_layout);
             actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
@@ -118,14 +118,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user == null){
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        FirebaseUser user = mAuth.getCurrentUser();
+//        if (user == null){
+//            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//        }
+//    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu){
