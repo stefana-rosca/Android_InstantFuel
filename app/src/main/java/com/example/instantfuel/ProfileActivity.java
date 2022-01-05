@@ -1,8 +1,12 @@
 package com.example.instantfuel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -18,6 +22,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     static List<User> userList = new ArrayList<>();
     String loggedUserName = "";
@@ -29,6 +35,9 @@ public class ProfileActivity extends AppCompatActivity {
     public TextView nameTV;
     public TextView phoneTV;
     public TextView passwordTV;
+
+    ImageButton settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +47,14 @@ public class ProfileActivity extends AppCompatActivity {
         phoneTV = findViewById(R.id.phone);
         emailTV = findViewById(R.id.email);
         passwordTV = findViewById(R.id.password);
+        settings = findViewById(R.id.tv_settings);
 
         getUsersInfoFromDb();
         mAuth = FirebaseAuth.getInstance();
+
+        settings.setOnClickListener(view ->{
+            startActivity(new Intent(ProfileActivity.this, UpdateProfileActivity.class));
+        });
     }
 
     public void getUsersInfoFromDb() {

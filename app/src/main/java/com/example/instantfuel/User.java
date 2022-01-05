@@ -1,5 +1,10 @@
 package com.example.instantfuel;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
     private String userUID;
     private String name;
@@ -16,6 +21,18 @@ public class User {
         this.email = email;
         this.password = password;
         this.phone = phone;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("userUID", userUID);
+        result.put("name", name);
+        result.put("email", email);
+        result.put("password", password);
+        result.put("phone", phone);
+
+        return result;
     }
 
     public String getUserUID() {
