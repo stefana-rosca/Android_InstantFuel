@@ -81,7 +81,19 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         String currentUserID=task.getResult().getUser().getUid();
                         saveToDatabase(currentUserID);
-                        Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                        mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(RegisterActivity.this, "User registered successfully. Please check your email for verification.", Toast.LENGTH_SHORT).show();
+                                    etRegEmail.setText("");
+                                    etRegPassword.setText("");
+                                }
+                                else {
+                                    Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     } else {
                         Toast.makeText(RegisterActivity.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

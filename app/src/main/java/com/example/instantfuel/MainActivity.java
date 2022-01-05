@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -37,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (SaveLoggedUser.getUserName(MainActivity.this).length() == 0)
+        setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+        if (SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         else {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
 
             drawerLayout = findViewById(R.id.my_drawer_layout);
             actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
@@ -59,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
                         mAuth.signOut();
                         clearUserName(getApplicationContext());
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
+                    if (id == R.id.nav_history) {
+                        startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+                    }
+                    if (id == R.id.joinTeam) {
+                        startActivity(new Intent(MainActivity.this, JoinTeamActivity.class));
                     }
                     return true;
                 }
@@ -116,14 +121,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user == null){
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        FirebaseUser user = mAuth.getCurrentUser();
+//        if (user == null){
+//            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//        }
+//    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu){
@@ -147,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void clearUserName(Context ctx)
     {
-        SharedPreferences.Editor editor = SaveLoggedUser.getSharedPreferences(ctx).edit();
+        android.content.SharedPreferences.Editor editor = SaveSharedPreference.getSharedPreferences(ctx).edit();
         editor.clear(); //clear all stored data
         editor.commit();
     }

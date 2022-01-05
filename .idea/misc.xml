@@ -3,11 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/drawable/ic_launcher_background.xml" value="0.16510416666666666" />
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_history.xml" value="0.13697916666666668" />
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_join_team.xml" value="0.15104166666666666" />
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_listview.xml" value="0.1765625" />
         <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_login.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_map.xml" value="0.16" />
         <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_new_order.xml" value="0.264" />
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_profile.xml" value="0.1265625" />
         <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_singleOrderView.xml" value="0.13645833333333332" />
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/layout/activity_single_order.xml" value="0.1" />
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/menu/drawer.xml" value="0.14791666666666667" />
+        <entry key="..\:/Users/popai/UNI/Mobile/Android_InstantFuel/app/src/main/res/menu/navigation_menu.xml" value="0.1578125" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.14387031408308004" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.20833333333333334" />

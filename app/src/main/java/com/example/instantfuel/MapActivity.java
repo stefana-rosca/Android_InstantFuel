@@ -63,10 +63,12 @@ public class MapActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), NewOrderActivity.class);
+                Intent i = new Intent();
                 Log.d("loccc","Map  " +  String.valueOf(locationString));
                 i.putExtra("locationString", locationString.toString());
-                v.getContext().startActivity(i);
+                setResult(RESULT_OK, i);
+                finish();
+//                v.getContext().startActivity(i);
             }
         });
 
