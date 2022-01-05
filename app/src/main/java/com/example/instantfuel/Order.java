@@ -10,6 +10,7 @@ public class Order {
     private int Quantity;
     private double TotalPrice;
     private Date date;
+    private String adress;
 
     public String getUserUID() {
         return userUID;
@@ -51,12 +52,21 @@ public class Order {
         this.date = date;
     }
 
-    public Order(String fuelType, int quantity, double totalPrice, Date date, String userUID) {
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public Order(String userUID, String fuelType, int quantity, double totalPrice, Date date, String adress) {
+        this.userUID = userUID;
         FuelType = fuelType;
         Quantity = quantity;
         TotalPrice = totalPrice;
         this.date = date;
-        this.userUID = userUID;
+        this.adress = adress;
     }
 
     public Order() {
@@ -70,6 +80,7 @@ public class Order {
                 ", Quantity=" + Quantity +
                 ", TotalPrice=" + TotalPrice +
                 ", date=" + date +
+                ", adress='" + adress + '\'' +
                 '}';
     }
 }

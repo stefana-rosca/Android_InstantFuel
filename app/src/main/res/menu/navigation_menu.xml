@@ -28,4 +28,13 @@
         android:orderInCategory="100"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/joinTeam"
+        android:title="@string/join_team"
+        android:orderInCategory="100"
+        android:text="Wanna join our team?"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+/>
+
 </menu>

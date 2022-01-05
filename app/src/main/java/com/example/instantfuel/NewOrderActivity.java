@@ -48,7 +48,7 @@ public class NewOrderActivity extends AppCompatActivity {
 
     Boolean checkSelectedSpinner1 = false;
     Boolean checkSelectedSpinner2 = false;
-
+    String locationString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,74 +68,82 @@ public class NewOrderActivity extends AppCompatActivity {
 
         btnMap = findViewById(R.id.btnMap);
 
+
         spinnerType = findViewById(R.id.spinnerType);
-        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-              @Override
-              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                  if (position==0) {
-                      textViewTotalPrice.setText("Total price: 0");
-                      checkSelectedSpinner1 = false;
-                  }
-                  else {
-                      checkSelectedSpinner1 = true;
-                      selectedFuelType = fuelList.get(position);
-                      selectedFuelPrice = fuelMap.get(fuelList.get(position));
-                      textViewPrice.setText("Price: " + selectedFuelPrice.toString());
-                  }
+            spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 0) {
+                        textViewTotalPrice.setText("Total price: 0");
+                        checkSelectedSpinner1 = false;
+                    } else {
+                        checkSelectedSpinner1 = true;
+                        selectedFuelType = fuelList.get(position);
+                        selectedFuelPrice = fuelMap.get(fuelList.get(position));
+                        textViewPrice.setText("Price: " + selectedFuelPrice.toString());
+                    }
 //                  spinnerQuantity.setSelection(0);
-              }
-              @Override
-              public void onNothingSelected(AdapterView<?> parent) {
-                  checkSelectedSpinner1 = false;
-                  Toast.makeText(NewOrderActivity.this, "Order has failed. You must choose from both fuel type and quantity! \n", Toast.LENGTH_SHORT).show();
-              }
-          });
-        textViewPrice = findViewById(R.id.textViewPrice);
-        textViewTotalPrice = findViewById(R.id.textViewTotalPrice);
-
-        loadDataInSpinnerType();
-
-        spinnerQuantity = findViewById(R.id.spinnerQuantity);
-        spinnerQuantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                checkSelectedSpinner2 = true;
-                totalPrice = selectedFuelPrice * quantities.get(position);
-                selectedQuantity = quantities.get(position);
-                if (position!=0) {
-                    String totalPriceRounded = String.format("%.2f", totalPrice);
-                    textViewTotalPrice.setText("Total price: " + totalPriceRounded);
                 }
-                else {
-                    textViewTotalPrice.setText("Total price: 0");
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    checkSelectedSpinner1 = false;
+                    Toast.makeText(NewOrderActivity.this, "Order has failed. You must choose from both fuel type and quantity! \n", Toast.LENGTH_SHORT).show();
+                }
+            });
+            textViewPrice = findViewById(R.id.textViewPrice);
+            textViewTotalPrice = findViewById(R.id.textViewTotalPrice);
+
+            loadDataInSpinnerType();
+
+            spinnerQuantity = findViewById(R.id.spinnerQuantity);
+            spinnerQuantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    checkSelectedSpinner2 = true;
+                    totalPrice = selectedFuelPrice * quantities.get(position);
+                    selectedQuantity = quantities.get(position);
+                    if (position != 0) {
+                        String totalPriceRounded = String.format("%.2f", totalPrice);
+                        textViewTotalPrice.setText("Total price: " + totalPriceRounded);
+                    } else {
+                        textViewTotalPrice.setText("Total price: 0");
+                        checkSelectedSpinner2 = false;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
                     checkSelectedSpinner2 = false;
+                    Toast.makeText(NewOrderActivity.this, "Order has failed. You must choose from both fuel type and quantity! \n", Toast.LENGTH_SHORT).show();
                 }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                checkSelectedSpinner2 = false;
-                Toast.makeText(NewOrderActivity.this, "Order has failed. You must choose from both fuel type and quantity! \n", Toast.LENGTH_SHORT).show();
-            }
-        });
+            });
 
-        loadDataInSpinnerQuantity();
+            loadDataInSpinnerQuantity();
 
-        Intent intent = getIntent();
-        String locationString = "";
-        locationString = intent.getStringExtra("locationString");
+
+//        Intent intent = getIntent();
+//        locationString = intent.getStringExtra("locationString");
         textViewLocation = findViewById(R.id.textViewLocation);
         textViewLocation.setText("");
-        btnMap.setOnClickListener(view ->{
-            startActivity(new Intent(NewOrderActivity.this, MapActivity.class));
+        btnMap.setOnClickListener(view -> {
+            startActivityForResult(new Intent(NewOrderActivity.this, MapActivity.class),1);
         });
-
-        textViewLocation.setText(locationString);
-        Log.d("loccc","NewOrder" + String.valueOf(locationString));
 
         btnOrder = findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(view -> {
             saveOrder();
         });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                locationString = data.getStringExtra("locationString");
+                textViewLocation.setText(locationString);
+            }
+        }
     }
 
     private void loadDataInSpinnerType(){
@@ -157,7 +165,7 @@ public class NewOrderActivity extends AppCompatActivity {
     public void saveOrder() {
         if (checkSelectedSpinner1 && checkSelectedSpinner2) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            Order order = new Order(selectedFuelType, selectedQuantity, totalPrice, new Timestamp(System.currentTimeMillis()), user.getUid());
+            Order order = new Order(user.getUid(), selectedFuelType, selectedQuantity, totalPrice, new Timestamp(System.currentTimeMillis()), locationString);
             CollectionReference dbOrder = database.collection("Order");
 
             dbOrder.add(order).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

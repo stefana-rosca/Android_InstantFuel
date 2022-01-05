@@ -20,6 +20,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView dateTextView;
+        public TextView locationTextView;
         public TextView typeTextView;
         public TextView quantityTextView;
         public TextView priceTextView;
@@ -28,6 +29,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             super(itemView);
 
             dateTextView = (TextView) itemView.findViewById(R.id.date);
+            locationTextView = (TextView) itemView.findViewById(R.id.location);
             typeTextView = (TextView) itemView.findViewById(R.id.type);
             quantityTextView = (TextView) itemView.findViewById(R.id.quantity);
             priceTextView = (TextView) itemView.findViewById(R.id.price);
@@ -66,6 +68,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd, HH:mm");
         String dateString = format.format( order.getDate());
         dateTextView.setText(dateString);
+        TextView locatonTextView = holder.locationTextView;
+        locatonTextView.setText(order.getAdress());
         TextView typeTextView = holder.typeTextView;
         typeTextView.setText(order.getFuelType());
         TextView quantityTextView = holder.quantityTextView;
