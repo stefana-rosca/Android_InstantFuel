@@ -7,4 +7,7 @@
     <string name="nav_logout">Logout</string>
     <string name="nav_map">Map</string>
     <string name="join_team">Wanna join our team?</string>
+    <string name="twitterUsername">\@joeytribbiani</string>
+    <string name="update_profile">Update Profile</string>
+
 </resources>

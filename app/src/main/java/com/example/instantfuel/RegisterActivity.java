@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText etRegName;
     TextInputEditText etRegEmail;
     TextInputEditText etRegPassword;
+    TextInputEditText etRegPhone;
     TextView tvLoginHere;
     Button btnRegister;
 
@@ -45,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         etRegName = findViewById(R.id.etRegName);
         etRegEmail = findViewById(R.id.etRegEmail);
         etRegPassword = findViewById(R.id.etRegPass);
+        etRegPhone = findViewById(R.id.etRegPhone);
         tvLoginHere = findViewById(R.id.tvLoginHere);
         btnRegister = findViewById(R.id.btnRegister);
 
@@ -63,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         String name = etRegName.getText().toString();
         String email = etRegEmail.getText().toString();
         String password = etRegPassword.getText().toString();
+        String phone = etRegPhone.getText().toString();
 
         if(TextUtils.isEmpty(name)){
             etRegName.setError("Name cannot be empty");
@@ -74,6 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
         }else if (TextUtils.isEmpty(password)){
             etRegPassword.setError("Password cannot be empty");
             etRegPassword.requestFocus();
+        }else if (TextUtils.isEmpty(phone)){
+            etRegPhone.setError("Phone cannot be empty");
+            etRegPhone.requestFocus();
         }else {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -106,7 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         public void saveToDatabase(String currentUserID) {
             CollectionReference dbUser = db.collection("User");
-            User user = new User(currentUserID,etRegName.getText().toString(), etRegEmail.getText().toString(), etRegPassword.getText().toString());
+            User user = new User(currentUserID,etRegName.getText().toString(), etRegEmail.getText().toString(), etRegPassword.getText().toString(), etRegPhone.getText().toString());
             dbUser.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {

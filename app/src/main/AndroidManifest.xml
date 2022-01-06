@@ -19,10 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstantFuel">
         <activity
+
             android:name=".JoinTeamActivity"
             android:exported="false" />
         <activity
             android:name=".HistoryActivity"
+            android:name=".UpdateProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".NewOrderActivity"
