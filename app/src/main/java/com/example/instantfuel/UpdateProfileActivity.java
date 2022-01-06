@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
@@ -43,12 +44,14 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference=db.collection("User").document();// = db.document("User/"+currentUserId);
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseFirestore database = FirebaseFirestore.getInstance();
     DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
 
     FirebaseAuth mAuth;
     static List<User> userList = new ArrayList<>();
     String idUser;
+    String docId;
+
 
 
     @Override
@@ -63,6 +66,32 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         update = findViewById(R.id.btnUpdate);
         currentUserId = user.getUid();
+
+        db.collection("User").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<QueryDocumentSnapshot> list = new ArrayList<>();
+                    String s;
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        s = String.valueOf(document.getData().values());
+                        Log.d("pleaseee", s.toString());
+                        Log.d("pleaseee", s.substring(s.lastIndexOf(" ")+1, s.length()-1));
+                        Log.d("pleaseee", currentUserId);
+                        if (s.substring(s.lastIndexOf(" ")+1, s.length()-1).equals(currentUserId))
+                            docId = document.getId();
+                    }
+                    Log.d("listtt", list.toString());
+                    String userUID;
+                } else {
+                    Log.d("error", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+
+
+        Log.d("plss", documentReference.getId());
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +192,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
         String pwRes = etPassword.getText().toString();
         String phoneRes = etPhone.getText().toString();
 
-       // writeNewPost("Ru2Tkeiaqp6VvxHgqxoP", nameRes, phoneRes,emailRes,pwRes);
+        Log.d("docId", docId);
+
+        writeNewPost(docId, nameRes, phoneRes,emailRes,pwRes);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //String currentUserId = user.getUid();
