@@ -113,6 +113,7 @@ public class MapActivity extends AppCompatActivity {
 //                            String knownName = addresses.get(0).getFeatureName();
                             if (locationString.length()==0)
                                 locationString.append(address);
+                            Log.d("loccc","Map  " +  String.valueOf(locationString));
                         }
                     });
                 }

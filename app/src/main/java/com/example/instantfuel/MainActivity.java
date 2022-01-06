@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     static List<User> userList = new ArrayList<>();
     String loggedUserName = "";
+    ImageView imageView;
 
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
+        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView.setImageResource(R.drawable.image);
+
         if (SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         else {

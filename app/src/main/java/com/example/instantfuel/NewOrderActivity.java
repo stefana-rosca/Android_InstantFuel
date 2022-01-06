@@ -3,6 +3,7 @@ package com.example.instantfuel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -81,6 +82,7 @@ public class NewOrderActivity extends AppCompatActivity {
                         selectedFuelType = fuelList.get(position);
                         selectedFuelPrice = fuelMap.get(fuelList.get(position));
                         textViewPrice.setText("Price: " + selectedFuelPrice.toString());
+                        textViewPrice.setTextColor(Color.GREEN);
                     }
 //                  spinnerQuantity.setSelection(0);
                 }
@@ -110,6 +112,7 @@ public class NewOrderActivity extends AppCompatActivity {
                         textViewTotalPrice.setText("Total price: 0");
                         checkSelectedSpinner2 = false;
                     }
+                    textViewTotalPrice.setTextColor(Color.GREEN);
                 }
 
                 @Override
@@ -163,7 +166,7 @@ public class NewOrderActivity extends AppCompatActivity {
 
     FirebaseFirestore database;
     public void saveOrder() {
-        if (checkSelectedSpinner1 && checkSelectedSpinner2) {
+        if (checkSelectedSpinner1 && checkSelectedSpinner2 && !locationString.equals("")) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             Order order = new Order(user.getUid(), selectedFuelType, selectedQuantity, totalPrice, new Timestamp(System.currentTimeMillis()), locationString);
             CollectionReference dbOrder = database.collection("Order");
@@ -186,6 +189,9 @@ public class NewOrderActivity extends AppCompatActivity {
                 Toast.makeText(NewOrderActivity.this, "Please select the fuel type \n", Toast.LENGTH_SHORT).show();
         else if (!checkSelectedSpinner2)
             Toast.makeText(NewOrderActivity.this, "Please select the fuel quantity \n", Toast.LENGTH_SHORT).show();
+
+        if (locationString.equals(""))
+            Toast.makeText(NewOrderActivity.this, "Please check your location \n", Toast.LENGTH_SHORT).show();
 
     }
 }
