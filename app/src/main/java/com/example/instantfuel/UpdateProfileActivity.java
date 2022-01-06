@@ -42,7 +42,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     String currentUserId;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    DocumentReference documentReference;// = db.document("User/"+currentUserId);
+    DocumentReference documentReference=db.collection("User").document();// = db.document("User/"+currentUserId);
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
 
@@ -148,27 +148,30 @@ public class UpdateProfileActivity extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         //childUpdates.put("/posts/" + key, postValues);
         childUpdates.put("/User/" + id + "/" + key, postValues);
+        System.out.println(user.toString()+" user");
         System.out.println(id+"id din functie");
         reference.updateChildren(childUpdates);
     }
 
     FirebaseFirestore database2;
     private void updateProfile() {
-        String id = /*documentReference.getId();*/db.collection("User").document().getId();
-        System.out.println("doc id "+id);
+        //String id = /*documentReference.getId();*/db.collection("User").document().getId();
+        System.out.println(documentReference.getPath()+"maybe");
+        //System.out.println("doc id "+id);
         String emailRes = etEmail.getText().toString();
         String nameRes = etName.getText().toString();
         String pwRes = etPassword.getText().toString();
         String phoneRes = etPhone.getText().toString();
 
-        writeNewPost(id, nameRes, phoneRes,emailRes,pwRes);
+       // writeNewPost("Ru2Tkeiaqp6VvxHgqxoP", nameRes, phoneRes,emailRes,pwRes);
 
-      /*  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //String currentUserId = user.getUid();
 
         System.out.println(currentUserId+" aaaaaa");
         //writeNewPost(idUser, nameRes, phoneRes, emailRes, pwRes);
-        final DocumentReference sDoc = db.collection("User").document(currentUserId);
+        String trypls="ZkWw51jwPvDSCZHUMRbJ";
+        final DocumentReference sDoc = db.collection("User").document(trypls);
 
         db.runTransaction(new Transaction.Function<Void>() {
             @Override
@@ -196,7 +199,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(UpdateProfileActivity.this, "failed", Toast.LENGTH_SHORT).show();
                     }
-                });*/
+                });
 
   /*      User updatedUser = new User(currentUserId,nameRes, emailRes, pwRes,phoneRes);
         CollectionReference dbOrder = database2.collection("User");
