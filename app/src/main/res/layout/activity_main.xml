@@ -26,7 +26,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Welcome, "
+                    android:layout_marginTop="40dp"
                     android:textSize="30sp"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="Out of gas...? We got you covered!"
+                    android:textSize="30sp"
+                    android:fontFamily="cursive"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -35,15 +52,15 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnNewOrder"
-                    android:layout_width="match_parent"
+                    android:textStyle="bold"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="New order"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="400dp"
+                    android:drawableLeft="@drawable/ic_baseline_add_box_24"
+                    android:text="New Order"/>
 
                 <FrameLayout
                     android:id="@+id/frame_layout"
@@ -51,6 +68,14 @@
                     android:layout_height="wrap_content">
 
                 </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_gravity="center"
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="-350dp"
+                    app:srcCompat="@drawable/image" />
 
             </LinearLayout>
 

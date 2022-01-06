@@ -7,12 +7,20 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     >
+    <com.google.android.material.card.MaterialCardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        card_view:cardCornerRadius="4dp">
+
     <TextView
         android:id="@+id/date"
         android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_weight="1"
         />
@@ -21,7 +29,7 @@
         android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="35dp"
         android:layout_marginStart="10dp"
         android:layout_weight="1"
         />
@@ -37,6 +45,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
+            android:layout_marginTop="75dp"
             >
 
             <TextView
@@ -67,4 +76,5 @@
                 />
         </LinearLayout>
     </HorizontalScrollView>
+    </com.google.android.material.card.MaterialCardView>>
 </LinearLayout>
