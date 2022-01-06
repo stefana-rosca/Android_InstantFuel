@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -26,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,39 +72,25 @@ public class UpdateProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void writeNewPost(String userId, String name, String phone, String email, String password) {
-        String key = reference.child("User").push().getKey();
-        System.out.println(key+" key");
-        User user = new User(userId, name, email , password, phone);
-        Map<String, Object> postValues = user.toMap();
-
-        Map<String, Object> childUpdates = new HashMap<>();
-        //childUpdates.put("/posts/" + key, postValues);
-        childUpdates.put("/User/" + userId + "/" + key, postValues);
-
-        reference.updateChildren(childUpdates);
-    }
     @Override
     protected void onStart(){
         super.onStart();
 
-/*        db.collection("User").get()
+        db.collection("User").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
                         if (documentSnapshots.isEmpty()) {
                             Log.d("userList", "onSuccess: LIST EMPTY");
                         } else {
-                            // Convert the whole Query Snapshot to a list
-                            // of objects directly! No need to fetch each
-                            // document.
+                            System.out.println(user.getUid()+" bye");
                             List<User> users = documentSnapshots.toObjects(User.class);
                             userList.addAll(users);
-                            for (User user : userList)
-                            {
-                                if(user.getUserUID().equals(mAuth.getCurrentUser().getUid()))
-                                {
-                                    idUser = mAuth.getCurrentUser().getUid();
+                            for (User user : userList) {
+                                if (user.getUserUID().equals(mAuth.getCurrentUser().getUid())){
+                                    System.out.println(user.getUserUID()+" hello "+mAuth.getCurrentUser().getUid());
+
+                                    //idUser = mAuth.getCurrentUser().getUid();
                                     String emailRes = user.getEmail();
                                     String nameRes = user.getName();
                                     String pwRes = user.getPassword();
@@ -112,12 +100,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
                                     etPhone.setText(phoneRes);
                                     etEmail.setText(emailRes);
                                     etPassword.setText(pwRes);
-                                }
-                                else{
-                                    Toast.makeText(UpdateProfileActivity.this, "No profile", Toast.LENGTH_SHORT).show();
-                                }
                             }
                         }
+                    }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -125,12 +110,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getApplicationContext(), "Error getting data!!!", Toast.LENGTH_LONG).show();
                     }
-                });*/
+                });
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUserId = user.getUid();
-
-        documentReference.collection("User").document(currentUserId);
+        /*FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = user.getUid();*/
+       /* documentReference.collection("User").document(currentUserId);
 
         documentReference.get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -152,20 +136,37 @@ public class UpdateProfileActivity extends AppCompatActivity {
                             Toast.makeText(UpdateProfileActivity.this, "No profile", Toast.LENGTH_SHORT).show();
                         }
                     }
-                });
+                });*/
     }
 
+    private void writeNewPost(String id, String name, String phone, String email, String password) {
+        String key = reference.child("User").push().getKey();
+        System.out.println(key+" key");
+        User user = new User(id, name, email , password, phone);
+        Map<String, Object> postValues = user.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        //childUpdates.put("/posts/" + key, postValues);
+        childUpdates.put("/User/" + id + "/" + key, postValues);
+        System.out.println(id+"id din functie");
+        reference.updateChildren(childUpdates);
+    }
+
+    FirebaseFirestore database2;
     private void updateProfile() {
+        String id = /*documentReference.getId();*/db.collection("User").document().getId();
+        System.out.println("doc id "+id);
         String emailRes = etEmail.getText().toString();
         String nameRes = etName.getText().toString();
         String pwRes = etPassword.getText().toString();
         String phoneRes = etPhone.getText().toString();
 
+        writeNewPost(id, nameRes, phoneRes,emailRes,pwRes);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+      /*  FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //String currentUserId = user.getUid();
 
-        System.out.println(idUser+" aaaaaa");
+        System.out.println(currentUserId+" aaaaaa");
         //writeNewPost(idUser, nameRes, phoneRes, emailRes, pwRes);
         final DocumentReference sDoc = db.collection("User").document(currentUserId);
 
@@ -195,7 +196,25 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(UpdateProfileActivity.this, "failed", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
+
+  /*      User updatedUser = new User(currentUserId,nameRes, emailRes, pwRes,phoneRes);
+        CollectionReference dbOrder = database2.collection("User");
+
+        dbOrder.add(updatedUser).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(UpdateProfileActivity.this, "Your order has been sucessfully completed!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // this method is called when the data addition process is failed.
+                // displaying a toast message when data addition is failed.
+                Toast.makeText(UpdateProfileActivity.this, "Fail to add order \n" + e, Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
 
     }
 }

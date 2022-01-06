@@ -22,15 +22,21 @@ public class User {
         this.password = password;
         this.phone = phone;
     }
+    public User(String name, String email, String password, String phone) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+    }
 
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("userUID", userUID);
-        result.put("name", name);
         result.put("email", email);
+        result.put("name", name);
         result.put("password", password);
         result.put("phone", phone);
+        result.put("userUID", userUID);
 
         return result;
     }
