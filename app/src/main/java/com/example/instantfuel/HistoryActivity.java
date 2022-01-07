@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +35,6 @@ public class HistoryActivity extends AppCompatActivity{
     }
 
     public void getOrderListFromDb() {
-        ArrayAdapter adapter = new ArrayAdapter<Order>(this, R.layout.activity_single_order, orderList);
         firebaseFirestore.collection("Order").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -82,8 +78,5 @@ public class HistoryActivity extends AppCompatActivity{
                         Toast.makeText(getApplicationContext(), "Error getting data!!!", Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
-
-
 }

@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
@@ -70,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (id == R.id.joinTeam) {
                         startActivity(new Intent(MainActivity.this, JoinTeamActivity.class));
+                    }
                     if (id == R.id.nav_account) {
                         clearUserName(getApplicationContext());
                         startActivity(new Intent(MainActivity.this, ProfileActivity.class));
@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             loggedInUserMsg = findViewById(R.id.textView);
             mAuth = FirebaseAuth.getInstance();
 
-//            if (LoginActivity.loggedIn)
             getUsersFromDbAndUpdateMainMsg();
 
             btnNewOrder.setOnClickListener(view -> {
@@ -107,9 +106,6 @@ public class MainActivity extends AppCompatActivity {
                         if (documentSnapshots.isEmpty()) {
                             Log.d("userList", "onSuccess: LIST EMPTY");
                         } else {
-                            // Convert the whole Query Snapshot to a list
-                            // of objects directly! No need to fetch each
-                            // document.
                             List<User> users = documentSnapshots.toObjects(User.class);
                             userList.addAll(users);
                             for (User user : userList)

@@ -3,7 +3,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -22,8 +21,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
 
     static List<User> userList = new ArrayList<>();
     String loggedUserName = "";

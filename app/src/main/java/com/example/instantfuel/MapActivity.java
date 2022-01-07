@@ -68,7 +68,6 @@ public class MapActivity extends AppCompatActivity {
                 i.putExtra("locationString", locationString.toString());
                 setResult(RESULT_OK, i);
                 finish();
-//                v.getContext().startActivity(i);
             }
         });
 
@@ -106,11 +105,6 @@ public class MapActivity extends AppCompatActivity {
                             }
 
                             String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-//                            String city = addresses.get(0).getLocality();
-//                            String state = addresses.get(0).getAdminArea();
-//                            String country = addresses.get(0).getCountryName();
-//                            String postalCode = addresses.get(0).getPostalCode();
-//                            String knownName = addresses.get(0).getFeatureName();
                             if (locationString.length()==0)
                                 locationString.append(address);
                             Log.d("loccc","Map  " +  String.valueOf(locationString));

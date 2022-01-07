@@ -30,22 +30,18 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     EditText etName, etPhone, etEmail, etPassword;
     Button update;
-
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String currentUserId;
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    DocumentReference documentReference=db.collection("User").document();
-
     FirebaseAuth mAuth;
     static List<User> userList = new ArrayList<>();
     String docId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
+
         mAuth = FirebaseAuth.getInstance();
 
         etName = findViewById(R.id.etName);

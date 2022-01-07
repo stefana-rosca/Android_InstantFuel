@@ -1,7 +1,5 @@
 package com.example.instantfuel;
 
-import android.text.Editable;
-
 public class NewTeamMember {
     private String email;
     private String name;

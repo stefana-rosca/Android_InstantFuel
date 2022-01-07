@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +17,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,7 +31,6 @@ import java.util.Set;
 
 public class NewOrderActivity extends AppCompatActivity {
 
-    FirebaseDatabase db;
     Spinner spinnerType;
     Spinner spinnerQuantity;
     TextView textViewPrice;
@@ -84,7 +81,6 @@ public class NewOrderActivity extends AppCompatActivity {
                         textViewPrice.setText("Price: " + selectedFuelPrice.toString());
                         textViewPrice.setTextColor(Color.GREEN);
                     }
-//                  spinnerQuantity.setSelection(0);
                 }
 
                 @Override
@@ -124,9 +120,6 @@ public class NewOrderActivity extends AppCompatActivity {
 
             loadDataInSpinnerQuantity();
 
-
-//        Intent intent = getIntent();
-//        locationString = intent.getStringExtra("locationString");
         textViewLocation = findViewById(R.id.textViewLocation);
         textViewLocation.setText("");
         btnMap.setOnClickListener(view -> {
