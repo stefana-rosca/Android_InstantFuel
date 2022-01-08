@@ -49,9 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_name"
-            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
             android:fontFamily="sans-serif"
-            android:text="new york, usa"
+            android:text=""
             android:textAllCaps="true"
             android:textColor="@color/address"
             android:textSize="14sp" />
@@ -101,6 +101,7 @@
 
                 <TextView
                     android:id="@+id/phone"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
@@ -129,6 +130,7 @@
 
                 <TextView
                     android:id="@+id/email"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
@@ -158,6 +160,7 @@
 
                 <TextView
                     android:id="@+id/password"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"

@@ -79,7 +79,7 @@ public class NewOrderActivity extends AppCompatActivity {
                         selectedFuelType = fuelList.get(position);
                         selectedFuelPrice = fuelMap.get(fuelList.get(position));
                         textViewPrice.setText("Price: " + selectedFuelPrice.toString());
-                        textViewPrice.setTextColor(Color.GREEN);
+                        textViewPrice.setTextColor(Color.WHITE);
                     }
                 }
 
@@ -108,7 +108,7 @@ public class NewOrderActivity extends AppCompatActivity {
                         textViewTotalPrice.setText("Total price: 0");
                         checkSelectedSpinner2 = false;
                     }
-                    textViewTotalPrice.setTextColor(Color.GREEN);
+                    textViewTotalPrice.setTextColor(Color.WHITE);
                 }
 
                 @Override

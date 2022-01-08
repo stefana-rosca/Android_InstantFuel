@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
         imageView = (ImageView) findViewById(R.id.imageView);
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(user.getUserUID().equals(mAuth.getCurrentUser().getUid()))
                                     loggedUserName = user.getName();
                             }
-                            loggedInUserMsg.setText("Welcome, " + loggedUserName.toUpperCase() + "!");
+                            loggedInUserMsg.setText("Welcome! " );
                         }
                     }
                 })

@@ -3,7 +3,9 @@ package com.example.instantfuel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     static List<User> userList = new ArrayList<>();
     String docId;
+    FirebaseUser authUser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.etPhone);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        update = findViewById(R.id.btnUpdate);
+        update = (Button) findViewById(R.id.btnUpdate);
 
         currentUserId = user.getUid();
 
@@ -74,6 +77,13 @@ public class UpdateProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateProfile();
+                Toast.makeText(getApplicationContext(), "Please wait while we update your profile...", Toast.LENGTH_SHORT).show();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             }
         });
     }
@@ -98,6 +108,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                                     String nameRes = user.getName();
                                     String pwRes = user.getPassword();
                                     String phoneRes = user.getPhone();
+                                    Log.d("Tell", "Telefon update: " + phoneRes);
 
                                     etName.setText(nameRes);
                                     etPhone.setText(phoneRes);
@@ -133,6 +144,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 transaction.update(sDoc, "name", nameRes);
                 transaction.update(sDoc, "password", pwRes);
                 transaction.update(sDoc, "phone", phoneRes);
+                authUser.updatePassword(pwRes);
 
                 return null;
             }
