@@ -43,7 +43,6 @@
         android:text="Wanna join our team?"
         android:orientation="vertical"
         android:layout_marginBottom="20dp"
-        android:icon="@drawable/ic_baseline_people_outline_24"
-        />
+        android:icon="@drawable/ic_baseline_people_outline_24"/>
 
 </menu>

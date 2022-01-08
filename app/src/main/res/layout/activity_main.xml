@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    tools:ignore="HardcodedText">
+    tools:ignore="HardcodedText"
+    android:background="@drawable/grad">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/my_drawer_layout"
@@ -15,69 +16,72 @@
         tools:context=".MainActivity"
         tools:ignore="HardcodedText">
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:text="Welcome, "
+                android:layout_marginTop="80dp"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-light"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textAlignment="center"
+                />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Welcome, "
-                    android:layout_marginTop="40dp"
-                    android:textSize="30sp"
-                    android:fontFamily="cursive"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="Out of gas...? We got you covered!"
-                    android:textSize="30sp"
-                    android:fontFamily="cursive"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:textAlignment="center"
+                android:text="Out of gas...? We got you covered!"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-light"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnNewOrder"
-                    android:textStyle="bold"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="400dp"
-                    android:drawableLeft="@drawable/ic_baseline_add_box_24"
-                    android:text="New Order"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNewOrder"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="370dp"
+                android:drawableLeft="@drawable/ic_baseline_add_box_24"
+                android:text="New Order"
+                android:textStyle="bold" />
 
-                <FrameLayout
-                    android:id="@+id/frame_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <FrameLayout
+                android:id="@+id/frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                </FrameLayout>
+            </FrameLayout>
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_gravity="center"
-                    android:layout_width="250dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="-350dp"
-                    app:srcCompat="@drawable/image" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="410dp"
+                android:layout_height="237dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-360dp"
+                app:srcCompat="@drawable/image" />
 
-            </LinearLayout>
+        </LinearLayout>
 
             <!--this the navigation view which draws
                 and shows the navigation drawer-->
@@ -88,11 +92,50 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 app:menu="@menu/navigation_menu"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints">
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Log out"
+                        android:id="@+id/nav_logout"
+                        android:title="@string/nav_logout"
+                        android:orderInCategory="100"
+                        app:showAsAction="never"
+                        android:icon="@drawable/ic_baseline_west_24"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:id="@+id/joinTeam"
+                        android:title="@string/join_team"
+                        android:orderInCategory="100"
+                        android:text="Wanna join our team?"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="20dp"
+                        android:icon="@drawable/ic_baseline_people_outline_24"/>
+                </LinearLayout>-->
+
+            </com.google.android.material.navigation.NavigationView>
 
         </androidx.drawerlayout.widget.DrawerLayout>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
