@@ -58,8 +58,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:drawablePadding="7dp"
-                        android:paddingLeft="10dp"
                         android:fontFamily="sans-serif-light"
+                        android:paddingLeft="10dp"
                         android:textColor="#000000"
                         android:textSize="18sp" />
 
@@ -90,8 +90,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:drawablePadding="7dp"
-                        android:paddingLeft="10dp"
                         android:fontFamily="sans-serif-light"
+                        android:paddingLeft="10dp"
                         android:textColor="#000000"
                         android:textSize="18sp" />
 
@@ -106,8 +106,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -122,8 +122,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:drawablePadding="7dp"
-                        android:paddingLeft="10dp"
                         android:fontFamily="sans-serif-light"
+                        android:paddingLeft="10dp"
                         android:textColor="#000000"
                         android:textSize="18sp" />
 
@@ -138,31 +138,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Password"
                     android:layout_marginTop="15dp"
+                    android:text="Password"
                     android:textColor="@color/headings"
                     android:textSize="13sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
 
-                    app:passwordToggleEnabled="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        app:passwordToggleEnabled="true"
                         android:id="@+id/etPassword"
-                        android:inputType="textPassword"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_margin="4dp"
+                        android:background="#FFA894CD"
                         android:drawablePadding="7dp"
-                        android:paddingLeft="10dp"
                         android:fontFamily="sans-serif-light"
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp"
                         android:textColor="#000000"
                         android:textSize="18sp"
-                        android:background="@color/followersBg"/>
+                        app:passwordToggleEnabled="true" />
 
                     <View
                         android:layout_width="match_parent"
@@ -178,7 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
-                    android:text="Save"/>
+                    android:text="Save" />
 
             </LinearLayout>
 
