@@ -40,7 +40,7 @@ public class NewOrderActivity extends AppCompatActivity {
     Double selectedFuelPrice=1.0;
     public static Map<String,Double> fuelMap = new HashMap();
     public List<String> fuelList;
-    public List<Integer> quantities = new ArrayList<>(Arrays.asList(0,1,2,3,4));
+    public List<Integer> quantities = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6));
     Button btnMap;
     MaterialButton btnOrder;
 
